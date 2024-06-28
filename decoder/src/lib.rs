@@ -263,7 +263,7 @@ impl Table {
         Ok((frame, consumed))
     }
 
-    pub fn new_stream_decoder(&self) -> Box<dyn StreamDecoder + '_> {
+    pub fn new_stream_decoder(&self) -> Box<dyn StreamDecoder + std::marker::Send + '_> {
         match self.encoding {
             Encoding::Raw => Box::new(stream::Raw::new(self)),
             Encoding::Rzcobs => Box::new(stream::Rzcobs::new(self)),
